@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Orders";
+}
+
+<h2>Orders</h2>
+<div ng-app="OrdersModule">
+    <div ng-controller="Orders">
+        <script type="text/ng-template" id="AddOrderModal.html">
+            <div class="modal-header">
+                <h3>Add New Order</h3>
+                <form name="AddOrderForm">
+                    <input ng-model="orderform.Date" class="form-control" type="date" placeholder="Date" title="Date" />
+                    <br />
+                    <label>Customer</label> <select ng-model="orderform.Name" title="Customer" ng-options="x.Name for x in custList">
+                        <option value="">Select Customer</option>
+                    </select>
+                    <br />
+                    <label>Product</label> <select ng-model="orderform.Product" title="Product" ng-options="x.ProductName for x in prodList">
+                        <option value="">Select Product</option>
+                    </select>
+                    <input ng-model="orderform.Price" class="form-control" type="text" ng-model-options="{{x.Price}}" title="Price" />
+                </form>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </div>
+        </script>
+        <script type="text/ng-template" id="EditOrderModal.html">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Order</h3>
+                <form name="EditOrderForm">
+                    <input ng-model="orderform.Date" class="form-control" type="date" placeholder="Date" title="Date" />
+                    <br />
+                    <label>Customer</label> <select ng-model="orderform.Name" title="Customer" ng-options="x.Name for x in custList">
+                        <option value="">Select Customer</option>
+                    </select>
+                    <br />
+                    <label>Product</label> <select ng-model="orderform.Product" title="Product" ng-options="x.ProductName for x in prodList">
+                        <option value="">Select Product</option>
+                    </select>
+                    <br />
+                    <label>Price: </label> {{orderform.Price | currency}}
+                </form>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </div>
+        </script>
+        <script type="text/ng-template" id="DeleteOrderModal.html">
+            <div class="modal-header">
+                <h3 class="modal-title">Delete Order</h3>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">Delete</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </div>
+        </script>
+        <div class="container">
+            <br />
+            <button class="btn btn-default" ng-click="open()">Add Order</button>
+            <br />
+            <br />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order Date</th>
+                        <th>Customer Name</th>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in AllOrders">
+                        <td>{{x.Date | date}}</td>
+                        <td>{{x.Name}}</td>
+                        <td>{{x.Product}}</td>
+                        <td>{{x.Price | currency }}</td>
+                        <td>
+                            <a href="#" ng-click="edit(x)">Edit</a>
+                            <a href="#" ng-click="delete(x)">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<style>
+    table, th, td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+</style>
+
+

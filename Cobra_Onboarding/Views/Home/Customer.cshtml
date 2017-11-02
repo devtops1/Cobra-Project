@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Customers";
+}
+<div ng-app="CustomerModule">
+    <div ng-controller="Customer">
+        <script type="text/ng-template" id="AddCustomerModal.html">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Customer</h3>
+            </div>
+            <form name="AddCustomerForm">
+                <input ng-model="customerform.Name" class="form-control" type="text" placeholder="Name" title="Name" />
+                <input ng-model="customerform.Address1" class="form-control" type="text" placeholder="Address1" title="Address1" />
+                <input ng-model="customerform.Address2" class="form-control" type="text" placeholder="Address2" title="Address2"/>
+                <input ng-model="customerform.Town_City" class="form-control" type="text" placeholder="Town/City" title="Town_City" />
+            </form>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+        <div class="container">
+            <h3>Customers</h3>
+            <br />
+            <button class="btn btn-default" ng-click="open()">Add Customer</button>
+            <br />
+            <br />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address1</th>
+                        <th>Address2</th>
+                        <th>Town/City</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- for loop in angular to populate the table-->
+                    <tr ng-repeat="x in People">
+                        <td>{{x.Name}}</td>
+                        <td>{{x.Address1}}</td>
+                        <td>{{x.Address2}}</td>
+                        <td>{{x.Town_City}}</td>
+                        <td>
+                            <a href="#" ng-click="edit(x)">Edit</a>
+                            <a href="#" ng-click="delete(x)">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <script type="text/ng-template" id="EditCustomerModal.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Edit Customer</h3>
+                </div>
+                <form name="EditCustomerForm">
+                    <input ng-model="customerform.Name" class="form-control" type="text" placeholder="Name" title="Name" />
+                    <input ng-model="customerform.Address1" class="form-control" type="text" placeholder="Address1" title="Address1" />
+                    <input ng-model="customerform.Address2" class="form-control" type="text" placeholder="Address2" title="Address2" />
+                    <input ng-model="customerform.Town_City" class="form-control" type="text" placeholder="Town/City" title="Town_City" />
+                </form>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="DeleteCustomerModal.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Delete Customer</h3>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" type="button" ng-click="ok(x)">Delete</button>
+                    <button class="btn btn-primary" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+        </div>
+    </div>
+</div>
+<style>
+    table, th, td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+
+        table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+</style>
+
